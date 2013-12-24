@@ -1,0 +1,21 @@
+doctype html
+html lang="en"
+
+  head
+    title == @title
+    meta charset="utf-8"
+
+    / Include stylesheets
+    == css
+    == yield_content :custom_stylesheets
+
+    / Include javascript
+    == js
+    == yield_content :custom_javascript
+
+    / Include coffeescript
+    == cs
+    == yield_content :custom_coffeescript
+
+  body
+    == yield
