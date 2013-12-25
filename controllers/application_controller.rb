@@ -103,7 +103,7 @@ class ApplicationController < Sinatra::Base
     also_reload File.expand_path('../../helpers/*', __FILE__)
 
     # Create the default repository root directory.
-    set :browser_root, '/'
+    set :browser_root, '/home'
 
   end
 

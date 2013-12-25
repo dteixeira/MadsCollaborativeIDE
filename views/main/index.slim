@@ -1,4 +1,7 @@
-/ Special includes.
+/ ------------------------------------------------------------------------------
+/ Special includes for html/head.
+/-------------------------------------------------------------------------------
+
 - content_for :custom_stylesheets do
   == css 'jqueryFileTree'
 - content_for :custom_javascript do
@@ -6,16 +9,36 @@
 - content_for :custom_coffeescript do
   == cs 'fileTree', 'firepad'
 
-/ File tree div.
-div#file_tree
-
 - content_for :custom_head_content do
 
   / Codemirror source.
   script src="https://cdn.firebase.com/v0/firebase.js"
   script src="/codemirror/lib/codemirror.js"
-  script src="/codemirror/mode/javascript/javascript.js"
   link rel="stylesheet" href="/codemirror/lib/codemirror.css"
+
+  / Load Codemirror modes.
+  script src="/codemirror/mode/javascript/javascript.js"
+  script src="/codemirror/mode/coffeescript/coffeescript.js"
+  script src="/codemirror/mode/css/css.js"
+  script src="/codemirror/mode/haml/haml.js"
+  script src="/codemirror/mode/htmlembedded/htmlembedded.js"
+  script src="/codemirror/mode/htmlmixed/htmlmixed.js"
+  script src="/codemirror/mode/less/less.js"
+  script src="/codemirror/mode/markdown/markdown.js"
+  script src="/codemirror/mode/ruby/ruby.js"
+  script src="/codemirror/mode/sass/sass.js"
+  script src="/codemirror/mode/sql/sql.js"
+  script src="/codemirror/mode/xml/xml.js"
+  script src="/codemirror/mode/yaml/yaml.js"
+
+  / Load Codemirror themes.
+  - Dir.chdir(File.join(settings.public_folder, 'codemirror', 'theme')) do
+    - Dir.glob('*.css').each do |c|
+      link rel="stylesheet" href="/codemirror/theme/#{c}"
+
+  / Load Codemirror addons.
+  script src="/codemirror/addon/selection/active-line.js"
+  script src="/codemirror/addon/edit/matchbrackets.js"
 
   / Firepad source.
   script src="/firepad/dist/firepad.js"
@@ -23,4 +46,60 @@ div#file_tree
 
   style .powered-by-firepad {display:none;}
 
+/-------------------------------------------------------------------------------
+/ Page source.
+/-------------------------------------------------------------------------------
+
+/ File tree div.
+div#file_tree
+
+/ Mode selector.
+select#mode_select
+  option selected="" ruby
+  option javascript
+  option coffeescript
+  option css
+  option haml
+  option htmlembedded
+  option htmlmixed
+  option less
+  option markdown
+  option sass
+  option sql
+  option xml
+  option haml
+
+
+/ Theme selector.
+select#theme_select
+  option selected="" default
+  option 3024-day
+  option 3024-night
+  option ambiance
+  option base16-dark
+  option base16-light
+  option blackboard
+  option cobalt
+  option eclipse
+  option elegant
+  option erlang-dark
+  option lesser-dark
+  option mbo
+  option midnight
+  option monokai
+  option neat
+  option night
+  option paraiso-dark
+  option paraiso-light
+  option rubyblue
+  option solarized dark
+  option solarized light
+  option the-matrix
+  option tomorrow-night-eighties
+  option twilight
+  option vibrant-ink
+  option xq-dark
+  option xq-light
+
+/ Firepad editor.
 div#firepad
