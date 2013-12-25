@@ -1,0 +1,11 @@
+- if @files
+  ul class="jqueryFileTree" style="display: none;"
+    - for d in @files[:dirs] do
+      li class="directory collapsed"
+        a href="#" rel="#{d[:path]}" #{d[:name]}
+    - for f in @files[:files] do
+      li class="file #{f[:ext]}"
+        a href="#" rel="#{f[:path]}" #{f[:name]}
+
+- else
+  h1 Bad request

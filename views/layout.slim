@@ -5,6 +5,9 @@ html lang="en"
     title == @title
     meta charset="utf-8"
 
+    / Include assorted content.
+    == yield_content :custom_head_content
+
     / Include stylesheets
     == css
     == yield_content :custom_stylesheets

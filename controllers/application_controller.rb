@@ -7,6 +7,7 @@ require 'sinatra/base'
 require 'sinatra/flash'
 require 'sinatra/partial'
 require 'sinatra/contrib/all'
+require 'sinatra/reloader'
 
 # Require assets.
 require 'compass'
@@ -68,6 +69,7 @@ class ApplicationController < Sinatra::Base
   register Sinatra::Flash
   register Sinatra::Partial
   register Sinatra::Contrib
+  register Sinatra::Reloader
 
   ##############################################################################
   # Include any application-wide helpers.
@@ -96,6 +98,12 @@ class ApplicationController < Sinatra::Base
     enable :sessions
     enable :method_override
     enable :partial_underscores
+
+    # Sinatra reloader extra files.
+    also_reload File.expand_path('../../helpers/*', __FILE__)
+
+    # Create the default repository root directory.
+    set :browser_root, '/'
 
   end
 
