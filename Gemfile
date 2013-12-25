@@ -69,6 +69,9 @@ gem "sinatra-advanced-routes", "~> 0.5.3"
 # Resource specific gems
 ################################################################################
 
+# The ptools gems is used to determine if a file is binary or text.
+gem "ptools", "~> 1.2.2"
+
 # TheRubyRacer is an embeds the V8 engine in Ruby. It's used to speed up
 # coffeescript compilation. It might also be used to embed JS code in Ruby and
 # vice versa, but unless you're working in a very specialized team where every

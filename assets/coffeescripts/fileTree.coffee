@@ -5,6 +5,4 @@ $('document').ready ->
     expandSpeed: -1,
     collapseSpeed: -1,
     multiFolder: false
-  }, (file) ->
-    alert(file)
-  )
+  }, window.load_file)

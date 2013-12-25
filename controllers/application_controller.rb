@@ -102,8 +102,16 @@ class ApplicationController < Sinatra::Base
     # Sinatra reloader extra files.
     also_reload File.expand_path('../../helpers/*', __FILE__)
 
+    ############################################################################
+    # Specific editing project definitions. Change at initial deploy.
+    ############################################################################
+
     # Create the default repository root directory.
     set :browser_root, '/home'
+
+    # Set a default project identifier. Should be unique for every project in
+    # the deployment. Hashes are acceptable.
+    set :project_id, 'mads_example_project'
 
   end
 
