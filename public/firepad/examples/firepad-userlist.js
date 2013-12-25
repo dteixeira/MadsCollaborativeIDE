@@ -8,7 +8,7 @@ var FirepadUserList = (function() {
     this.firebaseCallbacks_ = [];
 
     var self = this;
-    this.displayName_ = 'Guest ' + Math.floor(Math.random() * 1000);
+    this.displayName_ = userId;
     this.firebaseOn_(ref.root().child('.info/connected'), 'value', function(s) {
       if (s.val() === true && self.displayName_) {
         var nameRef = ref.child(self.userId_).child('name');
@@ -65,23 +65,7 @@ var FirepadUserList = (function() {
       }
     });
 
-    var nameInput = elt('input', null, { type: 'text', 'class': 'firepad-userlist-name-input'} );
-    nameInput.value = this.displayName_;
-
-    var nameHint = elt('div', 'ENTER YOUR NAME', { 'class': 'firepad-userlist-name-hint'} );
-
-    // Update Firebase when name changes.
-    on(nameInput, 'change', function(e) {
-      var name = nameInput.value || "Guest " + Math.floor(Math.random() * 1000);
-      myUserRef.child('name').onDisconnect().remove();
-      myUserRef.child('name').set(name);
-      nameHint.style.display = 'none';
-      nameInput.blur();
-      stopEvent(e);
-    });
-
-    var nameDiv = elt('div', [nameInput, nameHint]);
-
+    var nameDiv = elt('div', this.displayName_, { 'class': 'firepad-userlist-name' });
     return elt('div', [ colorDiv, nameDiv ], { 'class': 'firepad-userlist-user' });
   };
 
