@@ -8,4 +8,5 @@ map('/') { run MainController }
 map('/file/') { run FileController }
 map('/session/') { run SessionController }
 map('/git/') { run GitController }
+map('/project/') { run ProjectController }
 

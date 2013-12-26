@@ -22,4 +22,11 @@ module ApplicationHelpers
     request.path_info==path ? "current":  nil
   end
 
+  def check_login
+    if @current_user.nil?
+      flash[:error] = "You don't have permissions to access this page"
+      redirect '/'
+    end
+  end
+
 end

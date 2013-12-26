@@ -6,7 +6,7 @@ class SessionController < ApplicationController
     if @current_user.nil?
       slim 'session/login'.to_sym
     else
-      flash[:notice] = "You are already logged in."
+      flash[:notice] = "You are already logged in"
       redirect "/"
     end
   end
@@ -15,7 +15,7 @@ class SessionController < ApplicationController
     if @current_user.nil?
       @current_user = User.login params[:user]
       if @current_user.nil?
-        flash[:error] = "Failed to login. Check your username and password."
+        flash[:error] = "Failed to login, heck your username and password"
         redirect "/session/login"
       else
         session[:user_id] = @current_user.id
@@ -23,18 +23,18 @@ class SessionController < ApplicationController
         redirect "/"
       end
     else
-      flash[:notice] = "You are already logged in."
+      flash[:notice] = "You are already logged in"
       redirect "/"
     end
   end
 
   get '/logout' do
     if @current_user.nil?
-      flash[:error] = "You are not logged in."
+      flash[:error] = "You are not logged in"
       redirect "/"
     else
       session[:user_id] = nil
-      flash[:notice] = "Logout successful."
+      flash[:notice] = "Logout successful"
       redirect "/"
     end
   end
@@ -43,7 +43,7 @@ class SessionController < ApplicationController
     if @current_user.nil?
       slim 'session/register'.to_sym
     else
-      flash[:notice] = "You are already logged in."
+      flash[:notice] = "You are already logged in"
       redirect "/"
     end
   end
@@ -54,7 +54,7 @@ class SessionController < ApplicationController
       user = User.new u
       if user.save
         session[:user_id] = user.id
-        flash[:notice] = 'Register successful.'
+        flash[:notice] = 'Register successful'
         redirect '/'
       else
         str = ''
@@ -74,7 +74,7 @@ class SessionController < ApplicationController
       end
     rescue Exception => e
       puts e
-      flash[:error] = 'Failed to register account.'
+      flash[:error] = 'Failed to register account'
       redirect '/session/register'
     end
   end

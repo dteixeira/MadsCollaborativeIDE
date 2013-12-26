@@ -1,6 +1,7 @@
 class User
 
   include DataMapper::Resource
+  has n, :projects
   attr_accessor :password, :confirm_password
 
   # Filters.
