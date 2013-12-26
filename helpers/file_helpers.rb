@@ -1,8 +1,5 @@
 module FileHelpers
 
-  require 'digest/sha1'
-  require 'ptools'
-
   # Checks if file exists, is under root and is a text file.
   def valid_file root, file
     path = File.join(root, file)

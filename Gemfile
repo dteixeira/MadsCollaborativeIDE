@@ -72,6 +72,9 @@ gem "sinatra-advanced-routes", "~> 0.5.3"
 # The ptools gems is used to determine if a file is binary or text.
 gem "ptools", "~> 1.2.2"
 
+# Rack flash gem is used to give per session based flash.
+gem "rack-flash3", "~> 1.0.5"
+
 # TheRubyRacer is an embeds the V8 engine in Ruby. It's used to speed up
 # coffeescript compilation. It might also be used to embed JS code in Ruby and
 # vice versa, but unless you're working in a very specialized team where every

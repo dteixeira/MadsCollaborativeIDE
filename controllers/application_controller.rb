@@ -18,6 +18,9 @@ require 'v8'
 require 'cgi'
 require 'json'
 require 'data_mapper'
+require 'digest/sha1'
+require 'ptools'
+require 'rack-flash'
 
 # Require own libraries.
 require 'asset_handler'
@@ -95,9 +98,16 @@ class ApplicationController < Sinatra::Base
     Compass.add_project_configuration(File.join(settings.root, 'config', 'compass.rb'))
 
     # Enable needed behaviour.
-    enable :sessions
     enable :method_override
     enable :partial_underscores
+
+    # Enable sessions and flash
+    use Rack::Session::Cookie,
+      :key => 'mads.ide',
+      :path => '/',
+      :expire_after => 2592000,
+      :secret => '1 am a sup3r un1c0rn, wh3r3 ar3 my c00k135?'
+    use Rack::Flash
 
     # Sinatra reloader extra files.
     also_reload File.expand_path('../../helpers/*', __FILE__)
