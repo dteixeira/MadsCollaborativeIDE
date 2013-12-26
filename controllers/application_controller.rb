@@ -31,6 +31,12 @@ require 'asset_handler'
 class ApplicationController < Sinatra::Base
 
   ##############################################################################
+  # Require whole project.
+  ##############################################################################
+
+  Dir.glob('./{helpers,models,controllers}/*.rb').each { |file| require file }
+
+  ##############################################################################
   # Any global variables go in here.
   ##############################################################################
 
@@ -48,7 +54,7 @@ class ApplicationController < Sinatra::Base
   # DataMapper.setup(:default, 'sqlite::memory:')
 
   # To use a SQLite3 persistent database.
-  DataMapper.setup(:default, "sqlite://#{File.expand_path('../../database/db.sqlite3')}")
+  DataMapper.setup(:default, "sqlite://#{File.expand_path('../../database/db.sqlite3', __FILE__)}")
 
   # To use a MySQL database.
   # DataMapper.setup(:default, 'mysql://user:password@hostname/database')
@@ -148,10 +154,10 @@ class ApplicationController < Sinatra::Base
   # Create the current_user object.
   ##############################################################################
 
-  current_user = nil
+  @current_user = nil
   before do
     unless session[:user_id].nil?
-      current_user = User.find(session[:user_id])
+      @current_user = User.find(session[:user_id])
     end
   end
 
