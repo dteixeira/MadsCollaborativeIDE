@@ -32,6 +32,16 @@ require 'asset_handler'
 class ApplicationController < Sinatra::Base
 
   ##############################################################################
+  # Register Sinatra modules.
+  ##############################################################################
+
+  register Sinatra::AdvancedRoutes
+  register Sinatra::Flash
+  register Sinatra::Partial
+  register Sinatra::Contrib
+  register Sinatra::Reloader
+
+  ##############################################################################
   # Require whole project.
   ##############################################################################
 
@@ -73,16 +83,6 @@ class ApplicationController < Sinatra::Base
   # Migrates entire schema. This will drop all tables before recreating the
   # the schema, so all data is deleted. Use with caution.
   # DataMapper.auto_migrate!
-
-  ##############################################################################
-  # Register Sinatra modules.
-  ##############################################################################
-
-  register Sinatra::AdvancedRoutes
-  register Sinatra::Flash
-  register Sinatra::Partial
-  register Sinatra::Contrib
-  register Sinatra::Reloader
 
   ##############################################################################
   # Include any application-wide helpers.
@@ -145,7 +145,7 @@ class ApplicationController < Sinatra::Base
 
   use AssetHandler
 
-  #################################### g.log ##########################################
+  ##############################################################################
   # Defines generic behaviour on 404.
   ##############################################################################
 
@@ -161,7 +161,5 @@ class ApplicationController < Sinatra::Base
       @current_user = User.find(session[:user_id])
     end
   end
-  
- 
 
 end
