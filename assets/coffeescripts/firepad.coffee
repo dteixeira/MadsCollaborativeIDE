@@ -8,8 +8,16 @@ $('document').ready ->
     matchBrackets: true,
     mode: 'ruby'
   })
+  $(document).keypress((obj)->
+    if (obj.keyCode==26 && obj.ctrlKey ) || (obj.metaKey && obj.keyCode==122)
+      if(!obj.shiftKey)
+        codeMirror.undo()
+      else
+        codeMirror.redo()
+      return false
+  )
 
-  # Destroy the Firepad connection.
+# Destroy the Firepad connection.
   dispose_fp = () ->
     if firepad?
       firepad.dispose()
@@ -47,11 +55,11 @@ $('document').ready ->
           # Build Firebase connection.
           url = 'https://mads.firebaseio.com/' + json['project'] + '/' + json['hash']
           firepadRef = new Firebase(url)
-          firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, { userId: "" })
+          firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, { userId: "algumacoisa" })
 
           # Create user list.
           firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
-            document.getElementById('userlist'), "")
+            document.getElementById('userlist'), "algumacoisa")
 
           # First time initialization; if the history
           # is empty (new file) load the files contents
