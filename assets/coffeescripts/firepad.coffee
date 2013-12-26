@@ -55,11 +55,11 @@ $('document').ready ->
           # Build Firebase connection.
           url = 'https://mads.firebaseio.com/' + json['project'] + '/' + json['hash']
           firepadRef = new Firebase(url)
-          firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, { userId: "algumacoisa" })
+          firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, { userId: "" })
 
           # Create user list.
           firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
-            document.getElementById('userlist'), "algumacoisa")
+            document.getElementById('userlist'), "")
 
           # First time initialization; if the history
           # is empty (new file) load the files contents
