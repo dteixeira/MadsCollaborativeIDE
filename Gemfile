@@ -68,12 +68,18 @@ gem "sinatra-advanced-routes", "~> 0.5.3"
 # Needed for form helpers.
 gem "sinatra-formhelpers-ng", "~> 1.9.0"
 
+# Needed to redirect views with flash variable.
+gem "sinatra-redirect-with-flash", "~> 0.2.0"
+
 ################################################################################
 # Resource specific gems
 ################################################################################
 
 # SQL adapter for DataMapper.
 gem "dm-sqlite-adapter", "~> 1.2.0"
+
+# Git wrapper for Ruby.
+gem "git", "~> 1.2.6"
 
 # The ptools gems is used to determine if a file is binary or text.
 gem "ptools", "~> 1.2.2"

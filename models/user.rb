@@ -31,6 +31,19 @@ class User
   validates_presence_of :password, :confirm_password,
     :messages => { :presence => "You have to type a password and confirm it." }
 
+  # Validation methods.
+  def self.login user
+    begin
+      u = User.find(:username, user['username'])
+      u.password = user['password']
+      hash = BCrypt::Engine.hash_secret u.password, u.password_salt
+      u = nil unless hash == u.password_hash
+      return u
+    rescue
+      return nil
+    end
+  end
+
   # Helper methods.
   private
   def encrypt_password

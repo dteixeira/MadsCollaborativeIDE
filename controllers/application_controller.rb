@@ -9,6 +9,7 @@ require 'sinatra/partial'
 require 'sinatra/contrib/all'
 require 'sinatra/reloader'
 require 'sinatra/form_helpers'
+require 'sinatra/redirect_with_flash'
 
 # Require assets.
 require 'compass'
@@ -81,6 +82,7 @@ class ApplicationController < Sinatra::Base
   ##############################################################################
 
   helpers Sinatra::FormHelpers
+  helpers Sinatra::RedirectWithFlash
   helpers ApplicationHelpers
 
   ##############################################################################
@@ -141,5 +143,16 @@ class ApplicationController < Sinatra::Base
   ##############################################################################
 
   not_found{ slim :not_found }
+
+  ##############################################################################
+  # Create the current_user object.
+  ##############################################################################
+
+  current_user = nil
+  before do
+    unless session[:user_id].nil?
+      current_user = User.find(session[:user_id])
+    end
+  end
 
 end

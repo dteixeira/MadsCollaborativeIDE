@@ -7,6 +7,7 @@ class SessionController < ApplicationController
   end
 
   post '/login' do
+    puts params[:user]
   end
 
   get '/logout' do
