@@ -99,7 +99,7 @@ class ApplicationController < Sinatra::Base
     set :scss, { :style => :compact, :debug_info => true }
 
     # Compass configurations.
-    # Compass.add_project_configuration(File.join(settings.root, 'config', 'compass.rb'))
+    Compass.add_project_configuration(File.join(settings.root, 'config', 'compass.rb'))
 
     # Enable needed behaviour.
     enable :method_override
