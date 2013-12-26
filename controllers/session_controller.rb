@@ -3,6 +3,7 @@ class SessionController < ApplicationController
   helpers SessionHelpers
 
   get '/login' do
+    slim 'session/login'.to_sym
   end
 
   post '/login' do
