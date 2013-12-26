@@ -9,7 +9,7 @@ html lang="en"
     == yield_content :custom_head_content
 
     / Include stylesheets
-    == css
+    == css 'skeleton'
     == yield_content :custom_stylesheets
 
     / Include javascript
@@ -21,4 +21,5 @@ html lang="en"
     == yield_content :custom_coffeescript
 
   body
-    == yield
+    div.container
+      == yield
