@@ -1,0 +1,29 @@
+html{
+  height:100%;
+}
+
+body{
+  height:100%;
+}
+
+.container{
+  height:100%;
+}
+
+#file_tree{
+  overflow:auto;
+  height:100%;
+  box-shadow: inset 0px 0px 5px #888888;
+}
+
+#editor{
+  height:100%;
+}
+
+#firepad{
+  height:80%;
+}
+
+.CodeMirror{
+  height:100%;
+}
