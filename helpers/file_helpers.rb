@@ -28,6 +28,7 @@ module FileHelpers
     files = { files: [], dirs: [] }
     begin
       path = File.join(root, dir)
+      return files unless File.directory?(path)
       Dir.chdir(File.expand_path(path).untaint);
 
       # Provided directory is not under defined root;
