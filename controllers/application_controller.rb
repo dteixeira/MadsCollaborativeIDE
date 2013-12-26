@@ -21,6 +21,7 @@ require 'data_mapper'
 require 'digest/sha1'
 require 'ptools'
 require 'rack-flash'
+require 'bcrypt'
 
 # Require own libraries.
 require 'asset_handler'
@@ -45,7 +46,7 @@ class ApplicationController < Sinatra::Base
   # DataMapper.setup(:default, 'sqlite::memory:')
 
   # To use a SQLite3 persistent database.
-  # DataMapper.setup(:default, 'sqlite:///path/to/project.db')
+  DataMapper.setup(:default, "sqlite://#{File.expand_path('../../database/db.sqlite3')}")
 
   # To use a MySQL database.
   # DataMapper.setup(:default, 'mysql://user:password@hostname/database')
@@ -54,11 +55,11 @@ class ApplicationController < Sinatra::Base
   # DataMapper.setup(:default, 'postgres://user:password@hostname/database')
 
   # Finalizes all models.
-  # DataMapper.finalize
+  DataMapper.finalize
 
   # Upgrades the database schema. This won't modify any existing columns, only
   # add new columns or tables. Database data is kept.
-  # DataMapper.auto_upgrade!
+  DataMapper.auto_upgrade!
 
   # Migrates entire schema. This will drop all tables before recreating the
   # the schema, so all data is deleted. Use with caution.
@@ -90,6 +91,7 @@ class ApplicationController < Sinatra::Base
     set :root, File.expand_path('../../', __FILE__)
     set :views, File.expand_path('../../views', __FILE__)
     set :partial_template_engine, :slim
+    set :template_engine, :slim
     set :static, true
     set :public_folder, File.expand_path('../../public', __FILE__)
     set :scss, { :style => :compact, :debug_info => true }
