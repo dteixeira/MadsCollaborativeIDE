@@ -9,3 +9,4 @@ Dir.glob('./controllers/*.rb').each { |file| require file }
 # Map route prefixes to specific controllers.
 map('/') { run MainController }
 map('/file/') { run FileController }
+map('/session/') { run SessionController }
