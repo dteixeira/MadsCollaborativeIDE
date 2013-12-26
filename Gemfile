@@ -65,6 +65,9 @@ gem "sinatra-partial", "~> 0.4.0"
 # Needed for Compass routes.
 gem "sinatra-advanced-routes", "~> 0.5.3"
 
+# Needed for form helpers.
+gem "sinatra-formhelpers-ng", "~> 1.9.0"
+
 ################################################################################
 # Resource specific gems
 ################################################################################

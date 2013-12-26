@@ -8,6 +8,7 @@ require 'sinatra/flash'
 require 'sinatra/partial'
 require 'sinatra/contrib/all'
 require 'sinatra/reloader'
+require 'sinatra/form_helpers'
 
 # Require assets.
 require 'compass'
@@ -79,6 +80,7 @@ class ApplicationController < Sinatra::Base
   # Include any application-wide helpers.
   ##############################################################################
 
+  helpers Sinatra::FormHelpers
   helpers ApplicationHelpers
 
   ##############################################################################
