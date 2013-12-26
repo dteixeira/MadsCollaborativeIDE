@@ -13,6 +13,7 @@ class SessionController < ApplicationController
   end
 
   get '/register' do
+    slim 'session/register'.to_sym
   end
 
   post '/register' do

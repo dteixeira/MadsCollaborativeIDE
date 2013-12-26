@@ -115,6 +115,7 @@ class ApplicationController < Sinatra::Base
 
     # Sinatra reloader extra files.
     also_reload File.expand_path('../../helpers/*', __FILE__)
+    also_reload File.expand_path('../../assets/stylesheets/*', __FILE__)
 
     ############################################################################
     # Specific editing project definitions. Change at initial deploy.
