@@ -10,3 +10,5 @@ Dir.glob('./controllers/*.rb').each { |file| require file }
 map('/') { run MainController }
 map('/file/') { run FileController }
 map('/session/') { run SessionController }
+map('/git/') { run GitController }
+
