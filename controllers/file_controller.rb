@@ -12,7 +12,7 @@ class FileController < ApplicationController
   # List a directory to the first depth level.
   post '/list_directory' do
     @files = list_directory settings.browser_root, params[:dir]
-    slim 'file/list'.to_sym
+    slim 'file/list'.to_sym, :layout => :bare_layout
   end
 
   # Returns the unique hash of a file.
