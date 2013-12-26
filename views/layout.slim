@@ -9,7 +9,8 @@ html lang="en"
     == yield_content :custom_head_content
 
     / Include stylesheets
-    == css 'skeleton'
+    == css
+    link rel="stylesheet" href="/stylesheets/skeleton.css"
     == yield_content :custom_stylesheets
 
     / Include javascript
