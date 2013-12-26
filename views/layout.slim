@@ -22,4 +22,16 @@ html lang="en"
 
   body
     div.container
+      div#flash
+        - unless flash[:notice].nil?
+          div#notice
+          - values = flash[:notice].split ';'
+          - values.each do |v|
+            p "#{v}"
+        - unless flash[:error].nil?
+          div#error
+          - values = flash[:error].split ';'
+          - values.each do |v|
+            p "#{v}"
+
       == yield

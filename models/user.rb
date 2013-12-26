@@ -20,10 +20,12 @@ class User
     :unique => true
 
   property :password_hash, String,
-    :required => true
+    :required => true,
+    :length => 20..256
 
   property :password_salt, String,
-    :required => true
+    :required => true,
+    :length => 20..256
 
   property :created_at, DateTime
 
@@ -44,8 +46,12 @@ class User
     end
   end
 
+  def save
+    encrypt_password
+    super
+  end
+
   # Helper methods.
-  private
   def encrypt_password
     if password != nil && password == confirm_password
       self.password_salt = BCrypt::Engine.generate_salt
