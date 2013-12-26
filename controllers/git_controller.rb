@@ -11,6 +11,7 @@ class GitController < ApplicationController
 
   post '/commit' do
   	message = params[:message]
+  	commit message
   end
   
   post '/push' do
