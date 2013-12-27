@@ -1,7 +1,6 @@
 class Project
 
   include DataMapper::Resource
-  belongs_to :user
 
   property :id, Serial
 
@@ -15,4 +14,5 @@ class Project
     :length => 20..512,
     :format => :url
 
+  belongs_to :user
 end

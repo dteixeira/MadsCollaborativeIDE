@@ -1,7 +1,6 @@
 class User
 
   include DataMapper::Resource
-  has n, :projects
   attr_accessor :password, :confirm_password
 
   # Filters.
@@ -29,6 +28,8 @@ class User
     :length => 20..256
 
   property :created_at, DateTime
+
+  has n, :projects
 
   # Outside validations.
   validates_presence_of :password, :confirm_password,

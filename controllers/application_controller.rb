@@ -159,7 +159,7 @@ class ApplicationController < Sinatra::Base
   @current_user = nil
   before do
     unless session[:user_id].nil?
-      @current_user = User.find(session[:user_id])
+      @current_user = User.get(session[:user_id])
     end
   end
 

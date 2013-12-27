@@ -15,7 +15,7 @@ class SessionController < ApplicationController
     if @current_user.nil?
       @current_user = User.login params[:user]
       if @current_user.nil?
-        flash[:error] = "Failed to login, heck your username and password"
+        flash[:error] = "Failed to login, check your username and password"
         redirect "/session/login"
       else
         session[:user_id] = @current_user.id
@@ -58,16 +58,9 @@ class SessionController < ApplicationController
         redirect '/'
       else
         str = ''
-        if user.errors.length <= 1
-          user.errors.each do |k, v|
-            next if k.nil?
-            str += k
-          end
-        else
-          user.errors.each do |k, v|
-            next if k.nil?
-            str += k + ';'
-          end
+        user.errors.each do |k, v|
+          next if k.nil?
+          str += k + ';'
         end
         flash[:error] = str
         redirect '/session/register'
