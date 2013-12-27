@@ -17,7 +17,12 @@ $('document').ready ->
       return false
   )
 
-# Destroy the Firepad connection.
+  # Find current project and user name.
+  path = window.location.pathname
+  project = path.substr(path.lastIndexOf('/') + 1)
+  username = $('#username_hidden').text()
+
+  # Destroy the Firepad connection.
   dispose_fp = () ->
     if firepad?
       firepad.dispose()
@@ -41,7 +46,7 @@ $('document').ready ->
 
     # Retrieve the file's hash.
     $.post(
-      '/file/file_hash',
+      '/project/file_hash/' + project,
       { file: file },
       (data) ->
         json = $.parseJSON(data)
@@ -55,11 +60,11 @@ $('document').ready ->
           # Build Firebase connection.
           url = 'https://mads.firebaseio.com/' + json['project'] + '/' + json['hash']
           firepadRef = new Firebase(url)
-          firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, { userId: "" })
+          firepad = Firepad.fromCodeMirror(firepadRef, codeMirror, { userId: username })
 
           # Create user list.
           firepadUserList = FirepadUserList.fromDiv(firepadRef.child('users'),
-            document.getElementById('userlist'), "")
+            document.getElementById('userlist'), username)
 
           # First time initialization; if the history
           # is empty (new file) load the files contents
@@ -67,7 +72,7 @@ $('document').ready ->
           firepad.on('ready', () ->
             if firepad.isHistoryEmpty()
               $.post(
-                '/file/load_file',
+                '/project/load_file/' + project,
                 { file: file },
                 (content) ->
                   json = $.parseJSON(content)
