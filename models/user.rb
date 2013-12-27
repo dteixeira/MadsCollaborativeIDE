@@ -38,8 +38,8 @@ class User
   # Validation methods.
   def self.login user
     begin
-      u = User.first(:username, user['username'])
-      u.password = user['password']
+      u = User.first(:username => user[:username])
+      u.password = user[:password]
       hash = BCrypt::Engine.hash_secret u.password, u.password_salt
       u = nil unless hash == u.password_hash
       return u

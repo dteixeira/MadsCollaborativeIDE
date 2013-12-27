@@ -4,7 +4,7 @@ div#navbar class="navigation sixteen columns alpha omega"
       div#userinfo
         form action="/session/logout"
           input type="submit" value="Logout"
-        span.username = @current_user.username;
+        span.username #{@current_user.username}
     - else
       div#not_logged
         form action="/session/login"
