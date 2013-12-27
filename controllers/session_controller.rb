@@ -7,7 +7,7 @@ class SessionController < ApplicationController
       slim 'session/login'.to_sym
     else
       flash[:notice] = "You are already logged in"
-      redirect "/"
+      redirect "/project/list"
     end
   end
 
@@ -20,11 +20,11 @@ class SessionController < ApplicationController
       else
         session[:user_id] = @current_user.id
         flash[:notice] = "Login successful."
-        redirect "/"
+        redirect "/project/list"
       end
     else
       flash[:notice] = "You are already logged in"
-      redirect "/"
+      redirect "/project/list"
     end
   end
 
@@ -44,7 +44,7 @@ class SessionController < ApplicationController
       slim 'session/register'.to_sym
     else
       flash[:notice] = "You are already logged in"
-      redirect "/"
+      redirect "/project/list"
     end
   end
 
@@ -55,7 +55,7 @@ class SessionController < ApplicationController
       if user.save
         session[:user_id] = user.id
         flash[:notice] = 'Register successful'
-        redirect '/'
+        redirect '/project/list'
       else
         str = ''
         user.errors.each do |k, v|
