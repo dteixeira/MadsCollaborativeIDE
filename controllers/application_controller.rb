@@ -132,7 +132,7 @@ class ApplicationController < Sinatra::Base
     ############################################################################
 
     # Create the default repository root directory.
-    set :browser_root, '/'
+    set :browser_root, File.expand_path('../../repositories', __FILE__)
 
     # Set a default project identifier. Should be unique for every project in
     # the deployment. Hashes are acceptable.
