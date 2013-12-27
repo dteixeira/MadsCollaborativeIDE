@@ -16,6 +16,9 @@ class ProjectController < ApplicationController
   end
 
   get '/list' do
+    check_login
+    @projects = Project.all
+    slim 'project/list'.to_sym
   end
 
   post '/create' do
