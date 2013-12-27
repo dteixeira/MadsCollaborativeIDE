@@ -37,7 +37,7 @@ module ProjectHelpers
       if valid_file root, file
         path = File.join(root, file)
         File.open(path, "w") do |f|
-          f.read.write content
+          f.write content
         end
       end
     rescue Exception => e

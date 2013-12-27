@@ -7,6 +7,7 @@ $('document').ready ->
   current_file = null
 
   # Create empty Codemirror instance.
+  firepad = null
   codeMirror = CodeMirror(document.getElementById('firepad'), {
     lineWrapping: false,
     lineNumbers: true,
@@ -15,20 +16,24 @@ $('document').ready ->
     mode: 'ruby'
   })
 
-  save_file = (file, content) ->
-    $.post(
-      '/project/save_file/' + project,
-      { file: file, content: content }
-    )
+  # Saves a file on server.
+  save_file = () ->
+    if firepad? && current_file?
+      content = firepad.getText()
+      $.post(
+        '/project/save_file/' + project,
+        { file: current_file, content: content }
+      )
 
-  $(document).keypress((obj)->
-    if (obj.keyCode==26 && obj.ctrlKey ) || (obj.metaKey && obj.keyCode==122)
-      if(!obj.shiftKey)
-        codeMirror.undo()
-      else
-        codeMirror.redo()
-      return false
-  )
+  # Normal key bindings.
+  shortcut.add("Ctrl+S", () -> save_file(); return false)
+  shortcut.add("Ctrl+Z", () -> undo(); return false)
+  shortcut.add("Ctrl+Shift+Z", () -> redo(); return false)
+
+  # Mac key bindings.
+  shortcut.add("Meta+S", () -> save_file(); return false)
+  shortcut.add("Meta+Z", () -> undo(); return false)
+  shortcut.add("Meta+Shift+Z", () -> redo(); return false)
 
   # Destroy the Firepad connection.
   dispose_fp = () ->
