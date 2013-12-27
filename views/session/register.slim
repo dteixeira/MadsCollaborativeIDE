@@ -1,6 +1,26 @@
-== form '/session/register', :post
-  == input :user, :email
-  == input :user, :username
-  == password :user, :password
-  == password :user, :confirm_password
-  == submit
+== form '/session/register', :post, {class:'sixteen columns alpha omega'}
+  table.form_data
+    tr
+      td.label_form
+        label for="email" Email:
+      td
+        == input :user, :email
+    tr
+      td.label_form
+        label for="username" Username:
+      td
+        == input :user, :username
+    tr
+      td.label_form
+        label for="password" Password:
+      td
+        == password :user, :password
+    tr
+      td.label_form
+        label for="confirm_password" Password:
+      td
+        == password :user, :confirm_password
+    tr
+      td
+      td
+        == submit
