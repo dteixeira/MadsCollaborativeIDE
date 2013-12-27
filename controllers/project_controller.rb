@@ -30,8 +30,9 @@ class ProjectController < ApplicationController
       project.user_id = @current_user.id
       if project.save
         flash[:notice] = 'Project created'
-        # TODO CREATE REPO
-        redirect "/edit/#{project.name}"
+        Dir.chdir(settings.browser_root)
+        Git.clone project.repo_url, project.name
+        redirect "/project/edit/#{project.name}"
       else
         str = ''
         project.errors.each do |k, v|
