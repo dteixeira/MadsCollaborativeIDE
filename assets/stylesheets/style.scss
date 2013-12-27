@@ -20,6 +20,11 @@ body{
 
 #firepad{
   height:80%;
+  overflow:auto;
+}
+#userlist{
+  height:20%;
+  overflow:auto;
 }
 
 .CodeMirror{
