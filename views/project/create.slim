@@ -1,4 +1,17 @@
-== form '/project/create', :post
-  == input :project, :name
-  == input :project, :repo_url
-  == submit
+== form '/project/create', :post, {class:'sign sixteen columns alpha omega'}
+  h2 Add a Project
+  table.form_data
+    tr
+      td.label_form
+        label for="name" Name:
+      td
+        == input :project, :name
+    tr
+      td.label_form
+        label for="repo_url" Git URL:
+      td
+        == input :project, :repo_url
+    tr
+      td
+      td class="submit_btn"
+        == submit
