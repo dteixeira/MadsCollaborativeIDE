@@ -25,6 +25,7 @@ class ProjectController < ApplicationController
   get '/git/:project' do |p|
     check_owner p
     @project = find_project p
+    repo = open_git settings.browser_root, p
     slim 'project/git'.to_sym
   end
 
@@ -50,9 +51,29 @@ class ProjectController < ApplicationController
   end
 
   post '/git/push/:project' do |p|
+    begin
+      repo = open_git settings.browser_root, p
+      repo.push
+      flash[:notice] = 'Push success'
+      redirect "/project/git/#{p}"
+    rescue Exception => e
+      puts e
+      flash[:error] = 'Failed to push to remote'
+      redirect "/project/git/#{p}"
+    end
   end
 
   post '/git/pull/:project' do |p|
+    begin
+      repo = open_git settings.browser_root, p
+      repo.pull
+      flash[:notice] = 'Pull success'
+      redirect "/project/git/#{p}"
+    rescue Exception => e
+      puts e
+      flash[:error] = 'Failed to pull from remote'
+      redirect "/project/git/#{p}"
+    end
   end
 
   post '/create' do
