@@ -21,6 +21,7 @@ html lang="en"
     == yield_content :custom_coffeescript
 
   body
+    == partial :navbar
     div.container
       div#flash
         - unless flash[:notice].nil?

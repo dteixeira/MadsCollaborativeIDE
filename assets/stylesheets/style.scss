@@ -4,6 +4,7 @@ html{
 
 body{
   height:100%;
+  margin:0;
 }
 
 #file_tree{
@@ -23,3 +24,31 @@ body{
 .CodeMirror{
   height:100%;
 }
+
+#navbar{
+  background-color:#222222;
+  padding: 5pt;
+}
+
+#userdata{
+  height:23pt;
+}
+
+#userdata input[type=submit]{
+  padding:5pt;
+  padding-left:2pt;
+  padding-right:2pt;
+  background-color:#eeeeee;
+  border: solid 1pt #333333;
+  border-radius: 2pt / 3pt;
+}
+
+#not_logged>*,#userinfo>*{
+  display:inline-block;
+  float:right;
+}
+
+#userinfo span.username{
+  color:#eeeeee;
+}
+
