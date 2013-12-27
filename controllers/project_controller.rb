@@ -29,6 +29,24 @@ class ProjectController < ApplicationController
   end
 
   post '/git/commit/:project' do |p|
+    begin
+      message = params[:commit][:message]
+      if message.nil? || message.empty? || message.strip.empty?
+        flash[:error] = 'No commit message defined'
+        redirect "/project/git/#{p}"
+      end
+      repo = open_git settings.browser_root, p
+      repo.config('user.name', @current_user.username)
+      repo.config('user.email', @current_user.email)
+      repo.add
+      repo.commit(message)
+      flash[:notice] = 'Commit success'
+      redirect "/project/git/#{p}"
+    rescue Exception => e
+      puts e
+      flash[:error] = 'Nothing to commit'
+      redirect "/project/git/#{p}"
+    end
   end
 
   post '/git/push/:project' do |p|

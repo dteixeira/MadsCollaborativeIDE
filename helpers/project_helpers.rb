@@ -8,6 +8,11 @@ module ProjectHelpers
     File.join(root, project)
   end
 
+  def open_git root, project
+    repo = File.join(root, project)
+    Git.open(repo, :log => Logger.new(STDOUT))
+  end
+
   def check_owner project
     check_login
     p = find_project project
