@@ -29,12 +29,59 @@ class ProjectController < ApplicationController
   end
 
   post '/git/commit/:project' do |p|
+    begin
+      message = params[:commit][:message]
+      if message.nil? || message.empty? || message.strip.empty?
+        flash[:error] = 'No commit message defined'
+        redirect "/project/git/#{p}"
+      end
+      repo = open_git settings.browser_root, p
+      repo.config('user.name', @current_user.username)
+      repo.config('user.email', @current_user.email)
+      repo.add
+      repo.commit(message)
+      flash[:notice] = 'Commit success'
+      redirect "/project/git/#{p}"
+    rescue Exception => e
+      puts e
+      flash[:error] = 'Nothing to commit'
+      redirect "/project/git/#{p}"
+    end
   end
 
   post '/git/push/:project' do |p|
+    begin
+      user = params[:push][:username].strip
+      pass = params[:push][:password].strip
+      if user.empty? || pass.empty?
+        flash[:error] = 'Invalid username or password'
+        redirect "/project/git/#{p}"
+      end
+      project = find_project p
+      repo = open_git settings.browser_root, p
+      url = "https://#{user}:#{pass}@#{project.repo_url.sub(/^(http:\/\/|https:\/\/)/, '')}"
+      repo.config('remote.origin.url', url)
+      repo.push
+      flash[:notice] = 'Push success'
+      redirect "/project/git/#{p}"
+    rescue Exception => e
+      puts e
+      flash[:error] = 'Failed to push to remote'
+      redirect "/project/git/#{p}"
+    end
   end
 
   post '/git/pull/:project' do |p|
+    begin
+      repo = open_git settings.browser_root, p
+      repo.pull
+      flash[:notice] = 'Pull success'
+      redirect "/project/git/#{p}"
+    rescue Exception => e
+      puts e
+      flash[:error] = 'Failed to pull from remote'
+      redirect "/project/git/#{p}"
+    end
   end
 
   post '/create' do
