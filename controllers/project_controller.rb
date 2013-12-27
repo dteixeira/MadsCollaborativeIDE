@@ -25,7 +25,6 @@ class ProjectController < ApplicationController
   get '/git/:project' do |p|
     check_owner p
     @project = find_project p
-    repo = open_git settings.browser_root, p
     slim 'project/git'.to_sym
   end
 
@@ -52,7 +51,16 @@ class ProjectController < ApplicationController
 
   post '/git/push/:project' do |p|
     begin
+      user = params[:push][:username].strip
+      pass = params[:push][:password].strip
+      if user.empty? || pass.empty?
+        flash[:error] = 'Invalid username or password'
+        redirect "/project/git/#{p}"
+      end
+      project = find_project p
       repo = open_git settings.browser_root, p
+      url = "https://#{user}:#{pass}@#{project.repo_url.sub(/^(http:\/\/|https:\/\/)/, '')}"
+      repo.config('remote.origin.url', url)
       repo.push
       flash[:notice] = 'Push success'
       redirect "/project/git/#{p}"

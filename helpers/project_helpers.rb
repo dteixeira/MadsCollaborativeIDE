@@ -10,7 +10,7 @@ module ProjectHelpers
 
   def open_git root, project
     repo = File.join(root, project)
-    Git.open(repo, :log => Logger.new(STDOUT))
+    Git.open(repo)
   end
 
   def check_owner project
