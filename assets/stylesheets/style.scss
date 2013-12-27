@@ -1,5 +1,6 @@
 html{
   height:100%;
+  font-family:"Trebuchet MS", Helvetica, sans-serif;
 }
 
 body{
@@ -52,11 +53,47 @@ body{
   color:#eeeeee;
 }
 
+form.sign{
+  margin-top:30pt;
+  border:0;
+}
+
+form.sign fieldset{
+  border:0;
+}
+
 table.form_data{
-  width:100%;
+  width:90%;
+  margin: 0 auto;
+}
+table.form_data td>input[type=text], table.form_data td>input[type=password]{
+  border-radius: 3pt /4pt;
+  width:90%;
+  line-height:20pt;
+  border: 1pt solid #222222;
+  padding-left:4pt;
+  font-size:14pt;
+  vertical-align:middle;
 }
 
 td.label_form{
+  width:10ex;
+}
+
+td.submit_btn{
   text-align:right;
+}
+
+td.submit_btn input{
+  padding-left:0;
+  border-radius: 3pt /4pt;
+  line-height:20pt;
+  border: 1pt solid #222222;
+  padding-left:4pt;
+  font-size:14pt;
+  vertical-align:middle;
+  margin-right:10%;
+  
+
 }
 

@@ -1,4 +1,5 @@
-== form '/session/register', :post, {class:'sixteen columns alpha omega'}
+== form '/session/register', :post, {class:'sign sixteen columns alpha omega'}
+  h2 Sign-up
   table.form_data
     tr
       td.label_form
@@ -22,5 +23,5 @@
         == password :user, :confirm_password
     tr
       td
-      td
+      td class="submit_btn"
         == submit
