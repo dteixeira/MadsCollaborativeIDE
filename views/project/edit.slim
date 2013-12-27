@@ -53,13 +53,16 @@
 /-------------------------------------------------------------------------------
 
 span#username_hidden style="display:none;" #{@current_user.username}
-div.row
+div class="row editor_ui"
 
   / File tree div.
   div#file_tree class="three columns omega"
 
   / Firepad editor.
   div#editor class="thirteen columns alpha"
+
+    div#userlist
+
     / Mode selector.
     select#mode_select
       option selected="" ruby
@@ -108,5 +111,4 @@ div.row
       option xq-dark
       option xq-light
 
-    div#userlist
     div#firepad

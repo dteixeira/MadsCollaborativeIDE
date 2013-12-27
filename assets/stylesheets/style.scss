@@ -19,12 +19,11 @@ body{
 }
 
 #firepad{
-  height:80%;
+  height:85%;
   overflow:auto;
 }
 #userlist{
-  height:20%;
-  overflow:auto;
+  height:10%;
 }
 
 .CodeMirror{
@@ -98,7 +97,66 @@ td.submit_btn input{
   font-size:14pt;
   vertical-align:middle;
   margin-right:10%;
-  
+}
+
+#userlist>.firepad-userlist{
+  height:100%;
+
+  overflow:auto;
+}
+
+#userlist>.firepad-userlist>.firepad-userlist-heading{
+  margin:0;
+}
+
+#userlist>.firepad-userlist>.firepad-userlist-users{
+  left:0;
+  right:0;
+  bottom:0;
+  top:0;
+  position:relative;
+  box-shadow: inset 0px 0px 5px #222222;
+  padding-left: 2ex;
 
 }
 
+#userlist>.firepad-userlist>.firepad-userlist-users>.firepad-userlist-user{
+  display:block;
+}
+
+.editor_ui{
+  margin-top: 1ex;
+}
+
+#userlist>.firepad-userlist>.firepad-userlist-users>div>.firepad-userlist-user{
+  display:inline-block;
+  vertical-align:middle;
+  border-bottom: 0;
+  border-right: solid 1px #222222;
+  margin-left:1ex;
+  height: initial;
+  margin-bottom: 0.5ex;
+}
+
+#userlist>.firepad-userlist>.firepad-userlist-users>div>.firepad-userlist-user>*{
+  display:inline-block;
+  position:relative;
+  left:0;
+  right:0;
+  bottom:0;
+  top:0;
+  width:initial;
+  height: initial;
+  margin-right:1ex;
+  vertical-align:middle;
+}
+
+#userlist>.firepad-userlist>.firepad-userlist-users>div>.firepad-userlist-user>.firepad-userlist-color-indicator{
+  height:15px;
+  width:15px;
+}
+
+
+#userlist>.firepad-userlist>.firepad-userlist-users>div>.firepad-userlist-user>.firepad-userlist-name{
+  font-size:10pt;
+}
