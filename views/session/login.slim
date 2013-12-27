@@ -1,4 +1,17 @@
-== form '/session/login', :post
-  == input :user, :username
-  == password :user, :password
-  == submit
+== form '/session/login', :post, {class:'sign sixteen columns alpha omega'}
+  h2 Sign-in
+  table.form_data
+    tr
+      td.label_form
+        label for="username" Username:
+      td
+        == input :user, :username
+    tr
+      td.label_form
+        label for="password" Password:
+      td
+        == password :user, :password
+    tr
+      td
+      td class="submit_btn"
+        == submit
