@@ -12,6 +12,7 @@ class ProjectController < ApplicationController
 
   get '/edit/:project' do |project|
     check_login
+    @project = find_project project
     slim 'project/edit'.to_sym
   end
 
@@ -19,6 +20,21 @@ class ProjectController < ApplicationController
     check_login
     @projects = Project.all
     slim 'project/list'.to_sym
+  end
+
+  get '/git/:project' do |p|
+    check_owner p
+    @project = find_project p
+    slim 'project/git'.to_sym
+  end
+
+  post '/git/commit/:project' do |p|
+  end
+
+  post '/git/push/:project' do |p|
+  end
+
+  post '/git/pull/:project' do |p|
   end
 
   post '/create' do
@@ -30,8 +46,9 @@ class ProjectController < ApplicationController
       project.user_id = @current_user.id
       if project.save
         flash[:notice] = 'Project created'
-        # TODO CREATE REPO
-        redirect "/edit/#{project.name}"
+        Dir.chdir(settings.browser_root)
+        Git.clone project.repo_url, project.name
+        redirect "/project/edit/#{project.name}"
       else
         str = ''
         project.errors.each do |k, v|

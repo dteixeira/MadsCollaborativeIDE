@@ -8,6 +8,18 @@ module ProjectHelpers
     File.join(root, project)
   end
 
+  def check_owner project
+    check_login
+    p = find_project project
+    if p.nil?
+      flash[:error] = "This project does not exist"
+      redirect '/'
+    elsif p.user_id != @current_user.id
+      flash[:error] = "Only the creator of a project can manage it"
+      redirect '/'
+    end
+  end
+
   # Checks if file exists, is under root and is a text file.
   def valid_file root, file
     path = File.join(root, file)
