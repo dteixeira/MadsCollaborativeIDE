@@ -1,0 +1,18 @@
+== form "/project/git/commit/#{@project.name}", :post
+  h2 Commit
+  table.form_data
+    tr
+      td.label_form
+        label for="message" Message:
+      td
+        == input :commit, :message
+    tr
+      td
+      td class="submit_btn"
+        == submit 'Commit'
+
+== form "/project/git/push/#{@project.name}", :post
+  == submit 'Push'
+
+== form "/project/git/pull/#{@project.name}", :post
+  == submit 'Pull'
