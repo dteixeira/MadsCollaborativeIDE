@@ -56,12 +56,13 @@ span#username_hidden style="display:none;" #{@current_user.username}
 div class="row editor_ui"
 
   / File tree div.
-  div#file_tree class="three columns omega"
+  div class="three columns omega bar_file"
+    div#userlist
+    div#file_tree
 
   / Firepad editor.
   div#editor class="thirteen columns alpha"
 
-    div#userlist
 
     / Mode selector.
     select#mode_select

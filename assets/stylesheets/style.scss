@@ -10,7 +10,7 @@ body{
 
 #file_tree{
   overflow:auto;
-  height:500px;
+  height:50%;
   box-shadow: inset 0px 0px 5px #888888;
 }
 
@@ -23,7 +23,8 @@ body{
   overflow:auto;
 }
 #userlist{
-  height:10%;
+  height:50%;
+  width:100%;
 }
 
 .CodeMirror{
@@ -99,10 +100,15 @@ td.submit_btn input{
   margin-right:10%;
 }
 
+.bar_file{
+  height: 500px;
+}
+
 #userlist>.firepad-userlist{
   height:100%;
-
+  width:100%;
   overflow:auto;
+  min-width:initial;
 }
 
 #userlist>.firepad-userlist>.firepad-userlist-heading{
@@ -115,8 +121,6 @@ td.submit_btn input{
   bottom:0;
   top:0;
   position:relative;
-  box-shadow: inset 0px 0px 5px #222222;
-  padding-left: 2ex;
 
 }
 
@@ -129,7 +133,7 @@ td.submit_btn input{
 }
 
 #userlist>.firepad-userlist>.firepad-userlist-users>div>.firepad-userlist-user{
-  display:inline-block;
+  display:block;
   vertical-align:middle;
   border-bottom: 0;
   border-right: solid 1px #222222;
