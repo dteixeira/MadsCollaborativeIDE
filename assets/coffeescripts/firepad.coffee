@@ -43,6 +43,7 @@ $('document').ready ->
     if codeMirror?
       codeMirror.setValue('')
       codeMirror.clearHistory()
+    $('#userlist').empty()
 
   # Setup theme change.
   $('#theme_select').change ->
