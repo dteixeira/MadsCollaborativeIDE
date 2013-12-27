@@ -31,6 +31,20 @@ module ProjectHelpers
     content
   end
 
+  # Saves a file's contents to disk.
+  def save_file root, file, content
+    begin
+      if valid_file root, file
+        path = File.join(root, file)
+        File.open(path, "w") do |f|
+          f.read.write content
+        end
+      end
+    rescue Exception => e
+      puts e
+    end
+  end
+
   # Any helper code for the MainController should be defined here.
   def list_directory root, dir
     files = { files: [], dirs: [] }

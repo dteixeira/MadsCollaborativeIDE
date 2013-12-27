@@ -2,6 +2,9 @@ class ProjectController < ApplicationController
 
   helpers ProjectHelpers
 
+  # Global file synchronization locks.
+  @@file_locks = {}
+
   get '/create' do
     check_login
     slim 'project/create'.to_sym
@@ -63,6 +66,20 @@ class ProjectController < ApplicationController
     content = load_file path, file
     return { success: false }.to_json unless file
     return { success: true, content: content }.to_json
+  end
+
+  # Saves file to disk.
+  post '/save_file/:project' do |p|
+    file = params[:file]
+    content = params[:content] || ''
+    path = project_path settings.browser_root, p
+    hash = generate_hash(p, file)
+    return { success: false }.to_json if file.nil? || file.empty? || !valid_file(path, file)
+    @@file_locks[p] = {} if @@file_locks[p].nil?
+    @@file_locks[p][hash] = Mutex.new if @@file_locks[p][hash].nil?
+    @@file_locks[p][hash].synchronize do
+      save_file path, file, content
+    end
   end
 
 end

@@ -1,5 +1,11 @@
 $('document').ready ->
 
+  # Find current project and user name.
+  path = window.location.pathname
+  project = path.substr(path.lastIndexOf('/') + 1)
+  username = $('#username_hidden').text()
+  current_file = null
+
   # Create empty Codemirror instance.
   codeMirror = CodeMirror(document.getElementById('firepad'), {
     lineWrapping: false,
@@ -8,6 +14,13 @@ $('document').ready ->
     matchBrackets: true,
     mode: 'ruby'
   })
+
+  save_file = (file, content) ->
+    $.post(
+      '/project/save_file/' + project,
+      { file: file, content: content }
+    )
+
   $(document).keypress((obj)->
     if (obj.keyCode==26 && obj.ctrlKey ) || (obj.metaKey && obj.keyCode==122)
       if(!obj.shiftKey)
@@ -16,11 +29,6 @@ $('document').ready ->
         codeMirror.redo()
       return false
   )
-
-  # Find current project and user name.
-  path = window.location.pathname
-  project = path.substr(path.lastIndexOf('/') + 1)
-  username = $('#username_hidden').text()
 
   # Destroy the Firepad connection.
   dispose_fp = () ->
@@ -70,6 +78,7 @@ $('document').ready ->
           # is empty (new file) load the files contents
           # from disk.
           firepad.on('ready', () ->
+            current_file = file
             if firepad.isHistoryEmpty()
               $.post(
                 '/project/load_file/' + project,

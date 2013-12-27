@@ -25,6 +25,7 @@ require 'ptools'
 require 'rack-flash'
 require 'bcrypt'
 require 'git'
+require 'thread'
 
 # Require own libraries.
 require 'asset_handler'
