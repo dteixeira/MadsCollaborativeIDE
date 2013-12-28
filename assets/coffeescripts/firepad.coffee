@@ -35,6 +35,9 @@ $('document').ready ->
   shortcut.add("Meta+Z", () -> undo(); return false)
   shortcut.add("Meta+Shift+Z", () -> redo(); return false)
 
+  # Set autosave.
+  setInterval(save_file, 30000)
+
   # Destroy the Firepad connection.
   dispose_fp = () ->
     if firepad?
@@ -85,14 +88,14 @@ $('document').ready ->
           # from disk.
           firepad.on('ready', () ->
             current_file = file
-            if firepad.isHistoryEmpty()
-              $.post(
-                '/project/load_file/' + project,
-                { file: file },
-                (content) ->
-                  json = $.parseJSON(content)
-                  if json['success']
-                    firepad.setText(json['content'])
-              )
+            # if firepad.isHistoryEmpty()
+            $.post(
+              '/project/load_file/' + project,
+              { file: file },
+              (content) ->
+                json = $.parseJSON(content)
+                if json['success']
+                  firepad.setText(json['content'])
+            )
           )
     )
