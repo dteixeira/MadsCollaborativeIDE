@@ -19,7 +19,7 @@ body{
 }
 
 #firepad{
-  height:85%;
+  height:95%;
   overflow:auto;
 }
 #userlist{
@@ -164,3 +164,31 @@ td.submit_btn input{
 #userlist>.firepad-userlist>.firepad-userlist-users>div>.firepad-userlist-user>.firepad-userlist-name{
   font-size:10pt;
 }
+
+.proj_list{
+  height:500px;
+  border-radius: 5pt;
+  border: solid 1pt #aaaaaa;
+  margin-top: 1ex;
+  background-color: #fcfcfc;
+}
+.proj_table{
+  width:100%;
+}
+.proj_table tr>td{
+  width:100%;
+  border-bottom: 1pt solid #aaaaaa;
+  padding: 10pt;
+}
+
+.proj_table tr>td>a>div{
+  width: 100%;
+  height: 100%;
+}
+
+  .tab_title{
+  background-color: #cccccc;
+  margin:0;
+  padding:3pt;
+}
+

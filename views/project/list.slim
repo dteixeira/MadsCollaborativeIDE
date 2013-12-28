@@ -1,2 +1,16 @@
-- for project in @projects do
-  p #{project.name}
+div class="eight columns alpha proj_list"
+  h2 class="tab_title" My Projects
+  table class="proj_table"
+    - for project in @current_user.projects do
+      tr
+        td
+          a href="/project/edit/#{project.name}" 
+            div #{project.name}
+div class="eight columns omega proj_list"
+  h2 class="tab_title" All Projects
+  table class="proj_table"
+    - for project in @projects do
+        tr
+          td
+            a href="/project/edit/#{project.name}" 
+              div #{project.name}
